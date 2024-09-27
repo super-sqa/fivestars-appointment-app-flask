@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user_name }}'s Availability</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-white bg-primary">
+                <h3>Availability for {{ user_name }}</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for availability in availabilities %}
+                        <li class="list-group-item">{{ availability }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+                        <button id="go-home" class="btn btn-secondary mt-3" onclick="window.location='{{ url_for('home') }}'">Go To Home</button>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- Bootstrap JS (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

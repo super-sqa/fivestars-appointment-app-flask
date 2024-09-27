@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Availability</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1>Enter Your Availability</h1>
+
+        <form id="availability-form" action="{{ url_for('save_availability') }}" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="availability-1">Availability:</label>
+                <input type="text" class="form-control availability-input" id="availability-1" name="availability" placeholder="Enter date and time" required>
+            </div>
+            <button type="button" id="add-more" class="btn btn-info">Add More</button>
+            <button type="submit" class="btn btn-danger mt-3">Submit</button>
+        </form>
+
+        <button id="go-home" class="btn btn-secondary mt-3" onclick="window.location='{{ url_for('home') }}'">Go To Home</button>
+    </div>
+
+    <script>
+        document.getElementById('add-more').addEventListener('click', function() {
+            var new_input = document.createElement('input');
+            new_input.type = "text";
+            new_input.className = "form-control availability-input mt-2";
+            new_input.name = "availability";
+            new_input.placeholder = "Enter date and time";
+            document.getElementById('availability-form').appendChild(new_input);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container text-center mt-5">
+    <h1>Welcome to the Home Page!</h1>
+    <!-- Create Your Availability Button -->
+    <button class="btn btn-success mt-3" onclick="window.location='{{ url_for('addAvailability') }}'">Create Your Availability</button>
+    <button class="btn btn-success mt-3" onclick="window.location='{{ url_for('viewAvailabilities') }}'">View Current Availabilities</button>
+  </div>
+
+  <!-- Include Bootstrap JS (optional) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Your Custom JS -->
+  <script>
+    function createAvailability() {
+      // Add your JavaScript code to handle button click here
+      alert('Create Your Availability button clicked!');
+    }
+  </script>
+
+</body>
+</html>
