@@ -1,13 +1,9 @@
 import subprocess
 import sys
+import argparse
 
 # Define the server credentials and app directory on the server
-server_ip = "104.131.188.0"
-username = "root"
-password = "Five5Stars"  # Store securely in production
 project_dir = "/root/fivestars-appointment-app-flask"
-
-
 
 def run_command(command):
     """Helper function to run shell commands and exit on failure."""
@@ -20,7 +16,7 @@ def run_command(command):
         print(f"Command failed with exit code {result.returncode}")
         sys.exit(1)
 
-def deploy():
+def deploy(server_ip, username, password):
     # Step 1: SSH into the server and pull the latest code
     print("SSHing into the server and pulling the latest code...")
     ssh_command = f'sshpass -p "{password}" ssh -o StrictHostKeyChecking=no {username}@{server_ip} "cd {project_dir} && git pull origin main"'
@@ -43,13 +39,19 @@ def deploy():
     # Step 4: Restart the Flask server
     print("Starting the Flask server...")
     ssh_command = f'sshpass -p "{password}" ssh -o StrictHostKeyChecking=no {username}@{server_ip} "cd {project_dir} && source venv_appt/bin/activate && export PYTHONPATH={project_dir} && setsid nohup python3 appointmentapp/run.py > flask.out 2>&1 &"'
-
-
     run_command(ssh_command)
-    print('Successfuly deployed the app.')
 
-
-
+    print('Successfully deployed the app.')
 
 if __name__ == "__main__":
-    deploy()
+    # Setup argparse to get the server_ip, username, and password from the command line
+    parser = argparse.ArgumentParser(description="Deploy the Flask app.")
+    parser.add_argument('--server_ip', required=True, help='The IP address of the server.')
+    parser.add_argument('--username', required=True, help='The username to SSH into the server.')
+    parser.add_argument('--password', required=True, help='The password to SSH into the server.')
+
+    # Parse arguments
+    args = parser.parse_args()
+
+    # Call the deploy function with command line arguments
+    deploy(args.server_ip, args.username, args.password)
